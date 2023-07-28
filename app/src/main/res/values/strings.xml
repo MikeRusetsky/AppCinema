@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">AppCinema</string>
+    <string name="fav">Избранное</string>
+    <string name="watch_later">Посмотреть позже</string>
+    <string name="collections">Подборки</string>
+    <string name="settings">Настройки</string>
+    <string name="page_title">Поиск</string>
+    <string name="menu_home_title_text">Главная</string>
+    <!-- TODO: Remove or change this placeholder text -->
 </resources>
