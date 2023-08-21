@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mikerusetsky.appcinema.R
@@ -32,8 +34,13 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.showProgressBar.observe(viewLifecycleOwner, Observer<Boolean> {
+            binding.progressBar.isVisible = it
+        })
 
         //подпиcка на изменения списка фильмов
         //Кладем нашу БД в RV
