@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mikerusetsky.appcinema.R
@@ -16,13 +18,14 @@ import com.mikerusetsky.appcinema.view.rv_adapters.FilmListRecyclerAdapter
 import com.mikerusetsky.appcinema.view.MainActivity
 import com.mikerusetsky.appcinema.view.rv_adapters.TopSpacingItemDecoration
 import com.mikerusetsky.appcinema.viewmodel.HomeFragmentViewModel
+import kotlinx.coroutines.*
 import java.util.Locale
 
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
-
+    private lateinit var scope: CoroutineScope
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,15 +35,9 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        //подпиcка на изменения списка фильмов
-        //Кладем нашу БД в RV
-        viewModel.filmsListLiveData.observe(viewLifecycleOwner, Observer<List<Film>> {
-            filmsDataBase = it
-            filmsAdapter.addItems(it)
-        })
 
         AnimationHelper.performFragmentCircularRevealAnimation(
             binding.homeFragmentRoot,
@@ -79,7 +76,36 @@ class HomeFragment : Fragment() {
         initRecycler()
         //Кладем нашу БД в RV
         filmsAdapter.addItems(filmsDataBase)
+
+
+        //подпиcка на изменения списка фильмов
+        //Кладем нашу БД в RV
+        scope = CoroutineScope(Dispatchers.IO).also { scope ->
+            scope.launch {
+                viewModel.filmsListData.collect {
+                    withContext(Dispatchers.Main) {
+                        filmsAdapter.addItems(it)
+                        filmsDataBase = it
+                    }
+                }
+            }
+        }
+
+
+        scope.launch {
+            for (element in viewModel.showProgressBar) {
+                launch(Dispatchers.Main) {
+                    binding.progressBar.isVisible = element
+                }
+            }
+        }
     }
+
+    override fun onStop() {
+        super.onStop()
+        scope.cancel()
+    }
+
 
     private fun initPullToRefresh() {
         //Вешаем слушатель, чтобы вызвался pull to refresh
@@ -109,11 +135,12 @@ class HomeFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
             //Применяем декоратор для отступов
             val decorator = TopSpacingItemDecoration(7)
-            addItemDecoration(decorator)
+            addItemDecoration (decorator)
         }
 
         //Кладем нашу БД в RV
         filmsAdapter.addItems(filmsDataBase)
+
     }
 
     private val viewModel by lazy {
