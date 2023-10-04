@@ -1,7 +1,7 @@
 package com.mikerusetsky.appcinema.utils
 
-import com.mikerusetsky.appcinema.data.Entity.TmdbFilm
 import com.mikerusetsky.appcinema.domain.Film
+import com.mikerusetsky.remote_module.entity.TmdbFilm
 
 object Converter {
     fun convertApiListToDtoList(list: List<TmdbFilm>?): List<Film> {
