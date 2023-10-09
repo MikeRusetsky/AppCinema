@@ -13,7 +13,7 @@ interface TmdbApi {
         @Query("api_key") apiKey: String,
         @Query("language") language: String,
         @Query("page") page: Int
-    ): Observable <TmdbResults>
+    ): io.reactivex.rxjava3.core.Observable <TmdbResults>
 
     @GET("3/search/movie")
     fun getFilmFromSearch(
@@ -21,5 +21,5 @@ interface TmdbApi {
         @Query("language") language: String,
         @Query("query") query: String,
         @Query("page") page: Int
-    ): Observable<TmdbResults>
+    ): io.reactivex.rxjava3.core.Observable <TmdbResults>
 }

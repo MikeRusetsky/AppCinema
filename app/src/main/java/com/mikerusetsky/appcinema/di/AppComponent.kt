@@ -5,13 +5,14 @@ import com.mikerusetsky.appcinema.di.modules.DomainModule
 import com.mikerusetsky.appcinema.viewmodel.HomeFragmentViewModel
 import com.mikerusetsky.appcinema.viewmodel.SettingsFragmentViewModel
 import com.mikerusetsky.remote_module.RemoteModule
+import com.mikerusetsky.remote_module.RemoteProvider
 import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
 @Component(
     //Внедряем все модули, нужные для этого компонента
-    dependencies = [RemoteModule::class],
+    dependencies = [RemoteProvider::class],
     modules = [
         DatabaseModule::class,
         DomainModule::class

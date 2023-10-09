@@ -4,6 +4,7 @@ package com.mikerusetsky.appcinema
 
 import android.app.Application
 import com.mikerusetsky.appcinema.di.AppComponent
+import com.mikerusetsky.appcinema.di.DaggerAppComponent
 import com.mikerusetsky.appcinema.di.modules.DatabaseModule
 import com.mikerusetsky.appcinema.di.modules.DomainModule
 import com.mikerusetsky.remote_module.DaggerRemoteComponent

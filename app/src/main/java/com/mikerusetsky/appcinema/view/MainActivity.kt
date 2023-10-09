@@ -9,6 +9,7 @@ import com.mikerusetsky.appcinema.databinding.ActivityMainBinding
 import com.mikerusetsky.appcinema.domain.Film
 import com.mikerusetsky.appcinema.view.fragments.*
 
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding

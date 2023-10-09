@@ -21,6 +21,7 @@ import com.mikerusetsky.appcinema.R
 import com.mikerusetsky.appcinema.databinding.FragmentDetailsBinding
 import com.mikerusetsky.appcinema.domain.Film
 import com.mikerusetsky.appcinema.viewmodel.DetailsFragmentViewModel
+import com.mikerusetsky.remote_module.entity.ApiConstants
 import kotlinx.coroutines.*
 
 class DetailsFragment : Fragment() {
@@ -118,7 +119,7 @@ class DetailsFragment : Fragment() {
             //Выводим снекбар с кнопкой перейти в галерею
             Snackbar.make(
                 binding.root,
-                R.string.downloaded_to_gallery,
+                com.mikerusetsky.appcinema.R.string.downloaded_to_gallery,
                 Snackbar.LENGTH_LONG
             )
                 .setAction(R.string.open) {
@@ -175,7 +176,9 @@ class DetailsFragment : Fragment() {
             //Открываем канал для записи на диск
             val outputStream = contentResolver.openOutputStream(uri!!)
             //Передаем нашу картинку, может сделать компрессию
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+            if (outputStream != null) {
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+            }
             //Закрываем поток
             outputStream?.close()
         } else {
