@@ -9,12 +9,12 @@ apply from: "$project.rootDir/versions.gradle"
 
 android {
     namespace 'com.mikerusetsky.appcinema'
-    compileSdk 34
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.mikerusetsky.appcinema"
         minSdk 21
-        targetSdk 34
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 

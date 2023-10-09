@@ -1,5 +1,8 @@
 package com.mikerusetsky.appcinema.view
 
+import android.content.BroadcastReceiver
+import android.content.Intent
+import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -7,12 +10,14 @@ import androidx.fragment.app.Fragment
 import com.mikerusetsky.appcinema.R
 import com.mikerusetsky.appcinema.databinding.ActivityMainBinding
 import com.mikerusetsky.appcinema.domain.Film
+import com.mikerusetsky.appcinema.recievers.ConnectionChecker
 import com.mikerusetsky.appcinema.view.fragments.*
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var receiver: BroadcastReceiver
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -20,15 +25,26 @@ class MainActivity : AppCompatActivity() {
         initNavigation()
         installSplashScreen()
 
-
-
         //Зупускаем фрагмент при старте
         supportFragmentManager
             .beginTransaction()
             .add(R.id.fragment_placeholder, HomeFragment())
             .addToBackStack(null)
             .commit()
+
+        receiver = ConnectionChecker()
+        val filters = IntentFilter().apply {
+            addAction(Intent.ACTION_POWER_CONNECTED)
+            addAction(Intent.ACTION_BATTERY_LOW)
+        }
+        registerReceiver(receiver, filters)
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(receiver)
+    }
+
 
     fun launchDetailsFragment(film: Film) {
         //Создаем "посылку"
@@ -47,6 +63,8 @@ class MainActivity : AppCompatActivity() {
             .addToBackStack(null)
             .commit()
     }
+
+
 
     private fun initNavigation() {
         binding.navigationBottom.setOnNavigationItemSelectedListener {
@@ -103,5 +121,6 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 }
+
 
 
