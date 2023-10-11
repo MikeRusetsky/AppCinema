@@ -20,6 +20,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.mikerusetsky.appcinema.R
 import com.mikerusetsky.appcinema.databinding.FragmentDetailsBinding
 import com.mikerusetsky.appcinema.domain.Film
+import com.mikerusetsky.appcinema.view.notification.NotificationHelper
 import com.mikerusetsky.appcinema.viewmodel.DetailsFragmentViewModel
 import com.mikerusetsky.remote_module.entity.ApiConstants
 import kotlinx.coroutines.*
@@ -71,6 +72,10 @@ class DetailsFragment : Fragment() {
 
         binding.detailsFabDownloadWp.setOnClickListener {
             performAsyncLoadOfPoster()
+        }
+
+        binding.detailsFabWatchLater.setOnClickListener {
+            NotificationHelper.createNotification(requireContext(), film)
         }
     }
 
