@@ -1,5 +1,6 @@
 package com.mikerusetsky.appcinema.domain
 
+import android.annotation.SuppressLint
 import com.mikerusetsky.appcinema.MyApi
 import com.mikerusetsky.appcinema.data.MainRepository
 import com.mikerusetsky.appcinema.data.PreferenceProvider
@@ -17,6 +18,7 @@ class Interactor(private val repo: MainRepository, private val retrofitService: 
     //и страницу, которую нужно загрузить (это для пагинации)
 
 
+    @SuppressLint("CheckResult")
     fun getFilmsFromApi(page: Int) {
         //Показываем ProgressBar
         progressBarState.onNext(true)
