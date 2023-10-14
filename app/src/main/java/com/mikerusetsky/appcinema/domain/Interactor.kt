@@ -5,6 +5,7 @@ import com.mikerusetsky.appcinema.data.MainRepository
 import com.mikerusetsky.appcinema.data.PreferenceProvider
 import com.mikerusetsky.appcinema.utils.Converter
 import com.mikerusetsky.remote_module.TmdbApi
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import io.reactivex.rxjava3.subjects.BehaviorSubject
 import io.reactivex.rxjava3.kotlin.subscribeBy
@@ -14,6 +15,7 @@ class Interactor(private val repo: MainRepository, private val retrofitService: 
 
     //В конструктор мы будем передавать коллбэк из вью модели, чтобы реагировать на то, когда фильмы будут получены
     //и страницу, которую нужно загрузить (это для пагинации)
+
 
     fun getFilmsFromApi(page: Int) {
         //Показываем ProgressBar
@@ -40,6 +42,15 @@ class Interactor(private val repo: MainRepository, private val retrofitService: 
         .map {
             Converter.convertApiListToDtoList(it.tmdbFilms)
         }
+
+    //метод для очистки списка
+    fun clearListAfterCategoryChange() {
+        Completable.fromSingle<List<Film>> {
+            repo.clearDb()
+        }
+            .subscribeOn(Schedulers.io())
+            .subscribe()
+    }
 
     //Метод для сохранения настроек
     fun saveDefaultCategoryToPreferences(category: String) {

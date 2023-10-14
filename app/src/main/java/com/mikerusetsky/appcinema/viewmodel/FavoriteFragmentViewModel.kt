@@ -8,12 +8,12 @@ import com.mikerusetsky.appcinema.domain.Interactor
 import javax.inject.Inject
 
 //class FavoriteFragmentViewModel: ViewModel() {
-  //  val filmsListLiveData: MutableLiveData<List<Film>> = MutableLiveData()
+  // val filmsListLiveData: MutableLiveData<List<Film>> = MutableLiveData()
 
-  // @Inject
-  // lateinit var interactor: Interactor
+   //@Inject
+    //lateinit var interactor: Interactor
 
-   //init {
-//       App.instance.dagger.inject(this)
- //  }
+  // init {
+     // App.instance.dagger.inject(this)
+ // }
 //}

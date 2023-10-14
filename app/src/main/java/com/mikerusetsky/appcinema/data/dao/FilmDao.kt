@@ -20,4 +20,7 @@ interface FilmDao {
     //Кладём списком в БД, в случае конфликта перезаписываем
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(list: List<Film>)
+
+    @Query("DELETE FROM cached_films")
+    fun clearFilms()
 }
