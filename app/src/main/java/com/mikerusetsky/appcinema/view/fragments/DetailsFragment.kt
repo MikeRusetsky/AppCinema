@@ -102,6 +102,10 @@ class DetailsFragment : Fragment() {
             if (film.isInFavorites) R.drawable.baseline_favorite_24
             else R.drawable.baseline_favorite_border_24
         )
+
+        binding.detailsFabWatchLater.setOnClickListener {
+            NotificationHelper.notificationSet(requireContext(), film)
+        }
     }
 
     private fun performAsyncLoadOfPoster() {
