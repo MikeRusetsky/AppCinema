@@ -20,10 +20,8 @@ class FilmListRecyclerAdapter (private val clickListener: OnItemClickListener) :
 
 
     //В этом методе мы привязываем наш ViewHolder и передаем туда "надутую" верстку нашего фильма
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmViewHolder {
-        return FilmViewHolder(FilmItemBinding.inflate (
-                LayoutInflater.from(parent.context), parent, false)
-        )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return FilmViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.film_item, parent, false))
     }
 
     //В этом методе будет привязка полей из объекта Film к View из film_item.xml
