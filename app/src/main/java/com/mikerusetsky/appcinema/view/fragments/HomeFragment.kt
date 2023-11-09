@@ -14,8 +14,8 @@ import com.mikerusetsky.appcinema.domain.Film
 import com.mikerusetsky.appcinema.utils.AnimationHelper
 import com.mikerusetsky.appcinema.utils.AutoDisposable
 import com.mikerusetsky.appcinema.utils.addTo
-import com.mikerusetsky.appcinema.view.rv_adapters.FilmListRecyclerAdapter
 import com.mikerusetsky.appcinema.view.MainActivity
+import com.mikerusetsky.appcinema.view.rv_adapters.FilmListRecyclerAdapter
 import com.mikerusetsky.appcinema.view.rv_adapters.TopSpacingItemDecoration
 import com.mikerusetsky.appcinema.viewmodel.HomeFragmentViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers

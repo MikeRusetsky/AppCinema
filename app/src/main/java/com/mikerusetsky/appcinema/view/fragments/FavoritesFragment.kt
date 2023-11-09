@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.mikerusetsky.appcinema.databinding.FragmentFavoritesBinding
 import com.mikerusetsky.appcinema.domain.Film
 import com.mikerusetsky.appcinema.utils.AnimationHelper
-import com.mikerusetsky.appcinema.view.rv_adapters.FilmListRecyclerAdapter
 import com.mikerusetsky.appcinema.view.MainActivity
+import com.mikerusetsky.appcinema.view.rv_adapters.FilmListRecyclerAdapter
 import com.mikerusetsky.appcinema.view.rv_adapters.TopSpacingItemDecoration
 
 

@@ -10,6 +10,20 @@ apply from: "$project.rootDir/versions.gradle"
 android {
     namespace 'com.mikerusetsky.appcinema'
     compileSdk 34
+    flavorDimensions "version"
+
+    productFlavors {
+        basic {
+            dimension "version"
+            applicationIdSuffix ".basic"
+            versionNameSuffix "-basic"
+        }
+        pro {
+            dimension "version"
+            applicationIdSuffix ".pro"
+            versionNameSuffix "-pro"
+        }
+    }
 
 
     defaultConfig {
@@ -37,6 +51,18 @@ android {
     }
     buildFeatures {
         viewBinding = true
+    }
+    sourceSets {
+        basic {
+            java {
+                srcDirs 'src/basic/java'
+            }
+        }
+        pro {
+            java {
+                srcDirs 'src/pro/java'
+            }
+        }
     }
 }
 
