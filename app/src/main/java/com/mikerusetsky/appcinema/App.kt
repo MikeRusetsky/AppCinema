@@ -16,6 +16,7 @@ import com.mikerusetsky.appcinema.view.notification.NotificationConstants.CHANNE
 
 class App : Application() {
     lateinit var dagger: AppComponent
+    var isPromoShown = false
     override fun onCreate() {
         super.onCreate()
         instance = this
