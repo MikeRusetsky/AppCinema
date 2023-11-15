@@ -1,21 +1,24 @@
 package com.mikerusetsky.appcinema.view.rv_viewholders
 
 
+import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.mikerusetsky.appcinema.ApiConstants
 import com.mikerusetsky.appcinema.databinding.FilmItemBinding
 import com.mikerusetsky.appcinema.domain.Film
+import com.mikerusetsky.remote_module.entity.ApiConstants
 
 //В конструктор класс передается layout, который мы создали(film_item.xml)
-class FilmViewHolder (binding: FilmItemBinding) : RecyclerView.ViewHolder(binding.root) {
+class FilmViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView) {
+    private val filmItemBinding = FilmItemBinding.bind(itemView)
+
 
     //Привязываем View к переменным
-    private val title = binding.title
-    private val poster = binding.poster
-    private val description = binding.description
+    private val title = filmItemBinding.title
+    private val poster = filmItemBinding.poster
+    private val description = filmItemBinding.description
     //Вот здесь мы находим в верстке наш прогресс бар для рейтинга
-    private val ratingDonut = binding.ratingDonut
+    private val ratingDonut = filmItemBinding.ratingDonut
 
 
 

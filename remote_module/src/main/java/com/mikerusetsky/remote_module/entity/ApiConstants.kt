@@ -1,4 +1,4 @@
-package com.mikerusetsky.appcinema
+package com.mikerusetsky.remote_module.entity
 
 object ApiConstants {
     const val BASE_URL = "https://api.themoviedb.org/"
